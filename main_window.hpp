@@ -19,6 +19,12 @@ namespace STOPER
         QAction *exit;
         QMenu *filemenu;
 
+        // create actions
+        void createActions();
+
+        //create menu
+        void createMenus();
+
     private slots:
         void close_app();
     };
