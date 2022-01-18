@@ -13,7 +13,7 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 include(CTest)
 enable_testing()
 
-add_executable(cpp_stoper main.cpp main_window.cpp)
+add_executable(cpp_stoper main.cpp main_window.cpp logger/logger.cpp)
 
 target_link_libraries(cpp_stoper Qt5::Widgets)
 
