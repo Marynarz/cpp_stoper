@@ -13,10 +13,10 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 include(CTest)
 enable_testing()
 
-add_executable(cpp_stoper main.cpp)
+add_executable(cpp_stoper main.cpp main_window.cpp)
+
+target_link_libraries(cpp_stoper Qt5::Widgets)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
-
-target_link_libraries(cpp_stoper Qt5::Widgets)
