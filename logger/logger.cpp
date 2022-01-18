@@ -1,15 +1,17 @@
 #include "logger.hpp"
+#include <iostream>
 
-LOG::Logger * LOG::Logger::singleLog = nullptr;
+LOG::Logger *LOG::Logger::singleLog = nullptr;
 
 LOG::Logger::Logger()
 {
-    log_file = new std::ofstream(log_file_dest);
-
-    if (!log_file->is_open())
-        log_file->open(log_file_dest);
-
-    (*log_file) << "Hello!";
+    log_file.open(QFile::WriteOnly | QFile::Truncate);
+    out = new QTextStream(&log_file);
+    if(log_file.isOpen())
+        (*out) << "Hej!";
+    else
+        std::cout <<"Error";
+    std::cout <<"Dupa!";
 }
 
 LOG::Logger &LOG::Logger::getInstance()
@@ -21,9 +23,11 @@ LOG::Logger &LOG::Logger::getInstance()
 
 LOG::Logger::~Logger()
 {
+    log_file.flush();
+    log_file.close();
 }
 
-void LOG::Logger::addTrace(std::string trace)
+void LOG::Logger::addTrace(QString trace)
 {
-    (*log_file) << trace;
+    (*out) << trace;
 }

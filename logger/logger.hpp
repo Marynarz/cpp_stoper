@@ -1,15 +1,17 @@
 #ifndef _LOGGER_HPP_
 #define _LOGGER_HPP_
 
-#include <fstream>
+#include <QFile>
+#include <QTextStream>
+#include <QString>
 
 namespace LOG
 {
     // singleton class for logging activities
     class Logger
     {
-        const std::string log_file_dest = "log.txt";
-        std::ofstream *log_file = nullptr;
+        QFile log_file {"log.txt"};
+        QTextStream * out;
 
     protected:
         static Logger *singleLog;
@@ -26,7 +28,7 @@ namespace LOG
 
         static Logger &getInstance();
         ~Logger();
-        void addTrace(std::string trace);
+        void addTrace(QString trace);
     };
 };
 
