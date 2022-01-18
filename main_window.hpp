@@ -2,6 +2,12 @@
 #define _MAIN_WINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QAction>
+#include <QWidget>
+#include <QMenuBar>
+#include <QGridLayout>
+#include <QLabel>
 
 class QPushButton;
 
@@ -14,7 +20,14 @@ namespace STOPER
         explicit MainWindow();
 
     private:
-        QPushButton *m_button;
+        // main window
+        QWidget *widget;
+        QGridLayout *layout;
+        QLabel *label1;
+        // create layout
+        void createLayout();
+        
+        // menu
         QMenu *main_menu;
         QAction *exit;
         QMenu *filemenu;
@@ -22,7 +35,7 @@ namespace STOPER
         // create actions
         void createActions();
 
-        //create menu
+        // create menu
         void createMenus();
 
     private slots:
