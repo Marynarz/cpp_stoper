@@ -5,29 +5,27 @@ LOG::Logger *LOG::Logger::singleLog = nullptr;
 
 LOG::Logger::Logger()
 {
-    log_file.open(QFile::WriteOnly | QFile::Truncate);
-    out = new QTextStream(&log_file);
-    if(log_file.isOpen())
-        (*out) << "Hej!";
+    log_file = new std::ofstream("log.txt");
+    if (log_file->is_open())
+        (*log_file) << "Hej!";
     else
-        std::cout <<"Error";
-    std::cout <<"Dupa!";
+        std::cout << "Error";
 }
 
-LOG::Logger &LOG::Logger::getInstance()
+LOG::Logger *LOG::Logger::getInstance()
 {
     if (singleLog == nullptr)
         singleLog = new Logger();
-    return *singleLog;
+    return singleLog;
 }
 
 LOG::Logger::~Logger()
 {
-    log_file.flush();
-    log_file.close();
+    log_file->flush();
+    log_file->close();
 }
 
-void LOG::Logger::addTrace(QString trace)
+void LOG::Logger::addTrace(std::string trace)
 {
-    (*out) << trace;
+    (*log_file) << trace;
 }

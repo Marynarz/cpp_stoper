@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
-    LOG::Logger::getInstance().addTrace("Dziala?");
+    LOG::Logger::getInstance()->addTrace("Dziala?");
 
     STOPER::MainWindow window;
     window.show();
