@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <string>
+#include <mutex>
 
 namespace LOG
 {
@@ -12,6 +13,7 @@ namespace LOG
         const std::string log_file_dest = "cpp_stoper.log";
         std::ofstream log_file;
         static Logger *singleLog;
+        std::mutex mutex_controler;
         Logger();
 
     public:

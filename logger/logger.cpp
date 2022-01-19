@@ -7,10 +7,9 @@ LOG::Logger::Logger()
 {
     log_file.open(log_file_dest, std::fstream::trunc);
     if (log_file.is_open())
-        log_file << "Hej!" <<std::endl;
+        log_file << "Hej!" << std::endl;
     else
-        std::cout << "Error" <<std::endl;
-
+        std::cout << "Error" << std::endl;
 }
 
 LOG::Logger *LOG::Logger::getInstance()
@@ -27,5 +26,7 @@ LOG::Logger::~Logger()
 
 void LOG::Logger::addTrace(std::string trace)
 {
-    log_file << trace <<std::endl;
+    // add lock on mutex to prevent too much traceing add
+    std::lock_guard<std::mutex> guard(mutex_controler);
+    log_file << trace << std::endl;
 }
