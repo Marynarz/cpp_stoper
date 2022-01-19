@@ -1,7 +1,8 @@
 #include "logger.hpp"
 #include <iostream>
 
-LOG::Logger *LOG::Logger::singleLog = nullptr;
+LOG::Logger *LOG::Logger::single_log = nullptr;
+std::mutex LOG::Logger::mutex_controler;
 
 LOG::Logger::Logger()
 {
@@ -11,9 +12,11 @@ LOG::Logger::Logger()
 
 LOG::Logger *LOG::Logger::getInstance()
 {
-    if (singleLog == nullptr)
-        singleLog = new Logger();
-    return singleLog;
+    // add lock on mutex to prevent too much traceing add
+    std::lock_guard<std::mutex> guard(mutex_controler);
+    if (single_log == nullptr)
+        single_log = new Logger();
+    return single_log;
 }
 
 LOG::Logger::~Logger()
@@ -24,8 +27,6 @@ LOG::Logger::~Logger()
 
 void LOG::Logger::addTrace(std::string trace)
 {
-    // add lock on mutex to prevent too much traceing add
-    std::lock_guard<std::mutex> guard(mutex_controler);
     if (log_file.is_open())
         log_file << trace << std::endl;
     else

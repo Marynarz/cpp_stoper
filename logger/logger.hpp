@@ -12,8 +12,8 @@ namespace LOG
     {
         const std::string log_file_dest = "cpp_stoper.log";
         std::ofstream log_file;
-        static Logger *singleLog;
-        std::mutex mutex_controler;
+        static Logger *single_log;
+        static std::mutex mutex_controler;
         Logger();
 
     public:
