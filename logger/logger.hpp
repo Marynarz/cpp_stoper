@@ -9,7 +9,8 @@ namespace LOG
     // singleton class for logging activities
     class Logger
     {
-        std::ofstream *log_file;
+        const std::string log_file_dest = "cpp_stoper.log";
+        std::ofstream log_file;
         static Logger *singleLog;
         Logger();
 

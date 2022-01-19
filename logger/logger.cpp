@@ -5,13 +5,12 @@ LOG::Logger *LOG::Logger::singleLog = nullptr;
 
 LOG::Logger::Logger()
 {
-    log_file = new std::ofstream("log.txt", std::fstream::out);
-    if (log_file->is_open())
-        (*log_file) << "Hej!";
+    log_file.open(log_file_dest, std::fstream::trunc);
+    if (log_file.is_open())
+        log_file << "Hej!" <<std::endl;
     else
-        std::cout << "Error";
+        std::cout << "Error" <<std::endl;
 
-    std::cout <<log_file->fail() <<std::endl;
 }
 
 LOG::Logger *LOG::Logger::getInstance()
@@ -23,10 +22,10 @@ LOG::Logger *LOG::Logger::getInstance()
 
 LOG::Logger::~Logger()
 {
-    log_file->close();
+    log_file.close();
 }
 
 void LOG::Logger::addTrace(std::string trace)
 {
-    (*log_file) << trace;
+    log_file << trace <<std::endl;
 }
