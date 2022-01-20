@@ -25,7 +25,9 @@ namespace STOPER
         // main window
         QWidget *widget;
         QGridLayout *layout;
-        QLabel *label1;
+        QLabel *act_time;
+        QPushButton *start_stop_btn;
+        QAction *start_stop_action;
         // create layout
         void createLayout();
         
@@ -42,6 +44,12 @@ namespace STOPER
 
     private slots:
         void close_app();
+        void start_stop_slot();
+
+    private:
+        bool is_started;
+        std::chrono::steady_clock::time_point start_time;
+        std::chrono::steady_clock::time_point end_time;
     };
 };
 
