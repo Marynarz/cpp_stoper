@@ -27,8 +27,9 @@ LOG::Logger::~Logger()
 
 void LOG::Logger::addTrace(std::string trace)
 {
+    auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     if (log_file.is_open())
-        log_file << trace << std::endl;
+        log_file << now << ": " << trace << std::endl;
     else
         std::cerr << "Log file is not open!";
 }
