@@ -2,6 +2,7 @@
 
 STOPER::MainWindow::MainWindow()
 {
+    LOGF("Enter MainWindow constructor");
     widget = new QWidget;
     setCentralWidget(widget);
     createLayout();

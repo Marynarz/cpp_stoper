@@ -1,5 +1,6 @@
 #ifndef _MAIN_WINDOW_H
 #define _MAIN_WINDOW_H
+#define LOGF(x) LOG::Logger::getInstance()->addTrace(x)
 
 #include <QMainWindow>
 #include <QPushButton>
@@ -8,6 +9,7 @@
 #include <QMenuBar>
 #include <QGridLayout>
 #include <QLabel>
+#include "logger/logger.hpp"
 
 class QPushButton;
 
