@@ -3,6 +3,7 @@
 STOPER::MainWindow::MainWindow()
 {
     LOGF("Enter MainWindow constructor");
+    secs = 0;
     widget = new QWidget;
     setCentralWidget(widget);
     createLayout();
@@ -12,6 +13,8 @@ STOPER::MainWindow::MainWindow()
     createActions();
     createMenus();
     is_started = false;
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::update_time_lbl);
 }
 
 void STOPER::MainWindow::createActions()
@@ -30,12 +33,12 @@ void STOPER::MainWindow::createMenus()
 void STOPER::MainWindow::createLayout()
 {
     layout = new QGridLayout(widget);
-    act_time = new QLabel("Dupa123;");
+    act_time = new QLabel(QString::number(secs));
     start_stop_btn = new QPushButton("Start time");
     connect(start_stop_btn, &QPushButton::released, this, &MainWindow::start_stop_slot);
 
     layout->addWidget(act_time, 0, 0);
-    layout->addWidget(start_stop_btn,0, 1);
+    layout->addWidget(start_stop_btn, 0, 1);
 }
 
 void STOPER::MainWindow::close_app()
@@ -45,16 +48,23 @@ void STOPER::MainWindow::close_app()
 
 void STOPER::MainWindow::start_stop_slot()
 {
-    if(!is_started)
+    if (!is_started)
     {
-        start_time = std::chrono::steady_clock::now();
+        timer->start(1000);
         is_started = true;
         start_stop_btn->setText("Stop");
-        LOGF("Pushed");
+        LOGF("Pushed ");
     }
     else
     {
-        end_time = std::chrono::steady_clock::now();
+        timer->stop();
         is_started = false;
+        start_stop_btn->setText("Start");
     }
+}
+
+void STOPER::MainWindow::update_time_lbl()
+{
+    secs +=1;
+    act_time->setText(QString::number(secs));
 }
