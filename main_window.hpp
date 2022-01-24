@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QTimer>
 #include "logger/logger.hpp"
+#include "utils/number_ops.hpp"
 
 class QPushButton;
 

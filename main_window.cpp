@@ -50,7 +50,7 @@ void STOPER::MainWindow::start_stop_slot()
 {
     if (!is_started)
     {
-        timer->start(1000);
+        timer->start(100);
         is_started = true;
         start_stop_btn->setText("Stop");
         LOGF("Pushed ");
@@ -66,5 +66,5 @@ void STOPER::MainWindow::start_stop_slot()
 void STOPER::MainWindow::update_time_lbl()
 {
     secs +=1;
-    act_time->setText(QString::number(secs));
+    act_time->setText(QString::fromStdString(STOPER::UTILS::time_to_show(secs)));
 }
