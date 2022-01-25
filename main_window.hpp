@@ -56,6 +56,9 @@ namespace STOPER
         void start_stop_slot();
         void reset_slot();
         void update_time_lbl();
+
+    private:
+        void show_time();
     };
 };
 

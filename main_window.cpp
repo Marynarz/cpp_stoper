@@ -4,8 +4,6 @@ STOPER::MainWindow::MainWindow()
 {
     LOGF("Enter MainWindow constructor");
     widget = new QWidget;
-    start_time = std::chrono::steady_clock::now();
-    now_time = std::chrono::steady_clock::now();
     setCentralWidget(widget);
     createLayout();
     widget->setLayout(layout);
@@ -34,7 +32,8 @@ void STOPER::MainWindow::createMenus()
 void STOPER::MainWindow::createLayout()
 {
     layout = new QGridLayout(widget);
-    act_time = new QLabel(QString::fromStdString(STOPER::UTILS::time_to_show(start_time, now_time, counted_time)));
+    act_time = new QLabel();
+    show_time();
 
     start_stop_btn = new QPushButton("Start time");
     connect(start_stop_btn, &QPushButton::released, this, &MainWindow::start_stop_slot);
@@ -75,11 +74,16 @@ void STOPER::MainWindow::reset_slot()
     start_time = std::chrono::steady_clock::now();
     now_time = std::chrono::steady_clock::now();
     counted_time = std::chrono::duration_cast<std::chrono::seconds>(start_time - start_time);
-    act_time->setText(QString::fromStdString(STOPER::UTILS::time_to_show(start_time, now_time, counted_time)));
+    show_time();
 }
 
 void STOPER::MainWindow::update_time_lbl()
 {
     now_time = std::chrono::steady_clock::now();
+    show_time();
+}
+
+void STOPER::MainWindow::show_time()
+{
     act_time->setText(QString::fromStdString(STOPER::UTILS::time_to_show(start_time, now_time, counted_time)));
 }
