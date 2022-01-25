@@ -8,7 +8,7 @@ namespace STOPER
 {
     namespace UTILS
     {
-        std::string time_to_show(const std::chrono::steady_clock::time_point &start, const std::chrono::steady_clock::time_point &end);
+        std::string time_to_show(const std::chrono::steady_clock::time_point &start, const std::chrono::steady_clock::time_point &end, const std::chrono::steady_clock::duration &padding);
     };
 };
 
