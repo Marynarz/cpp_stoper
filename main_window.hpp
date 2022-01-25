@@ -29,6 +29,7 @@ namespace STOPER
         QGridLayout *layout;
         QLabel *act_time;
         QPushButton *start_stop_btn;
+        QPushButton *reset_btn;
         QAction *start_stop_action;
         QTimer *timer;
         // create layout
@@ -52,6 +53,7 @@ namespace STOPER
     private slots:
         void close_app();
         void start_stop_slot();
+        void reset_slot();
         void update_time_lbl();
     };
 };
