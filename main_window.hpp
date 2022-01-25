@@ -47,8 +47,9 @@ namespace STOPER
         void createMenus();
 
         bool is_started;
-        std::chrono::steady_clock::time_point start_time;
-        std::chrono::steady_clock::time_point now_time;
+        std::chrono::steady_clock::time_point start_time {};
+        std::chrono::steady_clock::time_point now_time {};
+        std::chrono::steady_clock::time_point counted_time {};
 
     private slots:
         void close_app();

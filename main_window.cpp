@@ -35,7 +35,7 @@ void STOPER::MainWindow::createLayout()
 {
     layout = new QGridLayout(widget);
     act_time = new QLabel(QString::fromStdString(STOPER::UTILS::time_to_show(start_time, now_time)));
-    
+
     start_stop_btn = new QPushButton("Start time");
     connect(start_stop_btn, &QPushButton::released, this, &MainWindow::start_stop_slot);
 
@@ -44,7 +44,7 @@ void STOPER::MainWindow::createLayout()
 
     layout->addWidget(act_time, 0, 0);
     layout->addWidget(start_stop_btn, 0, 1);
-    layout->addWidget(reset_btn, 1,1);
+    layout->addWidget(reset_btn, 1, 1);
 }
 
 void STOPER::MainWindow::close_app()
@@ -56,6 +56,8 @@ void STOPER::MainWindow::start_stop_slot()
 {
     if (!timer->isActive())
     {
+        start_time = std::chrono::steady_clock::now();
+        now_time = std::chrono::steady_clock::now();
         timer->start(100);
         start_stop_btn->setText("Stop");
         LOGF("Pushed ");
@@ -64,6 +66,7 @@ void STOPER::MainWindow::start_stop_slot()
     {
         timer->stop();
         start_stop_btn->setText("Start");
+        counted_time = std::chrono::time_point_cast<std::chrono::seconds> (now_time - start_time);
     }
 }
 
